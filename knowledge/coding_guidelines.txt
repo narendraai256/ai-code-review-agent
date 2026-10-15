@@ -1,0 +1,25 @@
+AI Code Review Agent - Coding Guidelines
+
+Security Guidelines
+
+1. Never hardcode passwords, API keys, tokens, or other secrets directly in source code.
+
+2. Store sensitive credentials in environment variables or a secure secrets manager.
+
+3. Validate and sanitize user input before processing it.
+
+4. Use parameterized SQL queries instead of building SQL queries with string concatenation.
+
+5. Authentication tokens should be validated before allowing access to protected resources.
+
+Code Quality Guidelines
+
+6. Functions should have a clear and focused responsibility.
+
+7. Avoid unnecessary duplicate code.
+
+8. Use meaningful variable and function names.
+
+9. Handle exceptions appropriately instead of silently ignoring errors.
+
+10. Remove debugging statements and temporary test code before production deployment.

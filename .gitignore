@@ -1,0 +1,30 @@
+
+# Python virtual environment
+.venv/
+venv/
+
+# Python generated files
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Project backup files
+main_phase5_backup.py
+main_phase6_before_endpoint_update.py
+*_backup.py
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Local database files
+*.db
+*.sqlite3
+code_review_backup.sql
