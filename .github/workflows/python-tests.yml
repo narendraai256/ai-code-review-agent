@@ -21,3 +21,6 @@ jobs:
 
       - name: Run security validator tests
         run: python test_security_validator.py
+
+      - name: Run regression tests
+        run: python -m unittest test_phase5_regression -v
