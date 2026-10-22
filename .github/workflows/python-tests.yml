@@ -24,3 +24,6 @@ jobs:
 
       - name: Run regression tests
         run: python -m unittest test_phase5_regression -v
+
+      - name: Run calculation tests
+        run: python -m unittest test_calculations -v

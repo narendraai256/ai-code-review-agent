@@ -32,6 +32,7 @@ if tool_name == "calculate_total_changes":
     result = calculate_total_changes(additions, deletions)
 
     print(result)
+    assert result == 25 
 # Describes the tool that will be available to the LLM.
 tool_definition = {
     "name": "calculate_total_changes",
