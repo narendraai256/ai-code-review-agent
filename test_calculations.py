@@ -1,6 +1,6 @@
 import unittest
 
-from test_tools import calculate_total_changes
+from tools import calculate_total_changes
 
 
 class TestCalculations(unittest.TestCase):

@@ -1,8 +1,4 @@
-
-# This function calculates the total changes in a Pull Request.
-def calculate_total_changes(additions, deletions):
-    total = additions + deletions
-    return total
+from tools import calculate_total_changes
 
 
 # Simulates a structured tool request.
