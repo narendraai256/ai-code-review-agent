@@ -1,4 +1,5 @@
 from mcp.server.fastmcp import FastMCP
+from tools import calculate_total_changes as calculate_total_changes_local
 
 # Creates an MCP server and gives it a name.
 mcp = FastMCP("AI Code Review Tools")
@@ -11,7 +12,7 @@ def calculate_total_changes(
     deletions: int
 ) -> int:
 
-    return additions + deletions
+    return calculate_total_changes_local(additions, deletions)
 
 
 # Starts the MCP server when this file is executed directly.
