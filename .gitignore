@@ -28,3 +28,8 @@ main_phase6_before_endpoint_update.py
 *.db
 *.sqlite3
 code_review_backup.sql
+
+# Code coverage generated files
+.coverage
+.coverage.*
+htmlcov/
