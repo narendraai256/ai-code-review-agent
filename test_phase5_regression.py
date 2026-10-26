@@ -58,6 +58,7 @@ class TestPhase5Security(unittest.TestCase):
         self.assertTrue(findings)
 
     def test_ast_failure_is_not_reported_as_safe(self):
+
         def broken_analyzer(code):
             raise RuntimeError("Analyzer unavailable")
 
@@ -65,6 +66,18 @@ class TestPhase5Security(unittest.TestCase):
             safe_ast_analysis(
                 'password = "admin123"',
                 broken_analyzer
+            )
+
+    # NEW TEST: Reject an AST analyzer returning an invalid data type.
+    def test_ast_analyzer_rejects_non_list_response(self):
+
+        def invalid_analyzer(code):
+            return "No security issues"
+
+        with self.assertRaises(ReviewServiceError):
+            safe_ast_analysis(
+                'password = "admin123"',
+                invalid_analyzer
             )
 
 
