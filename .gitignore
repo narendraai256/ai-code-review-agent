@@ -33,3 +33,4 @@ code_review_backup.sql
 .coverage
 .coverage.*
 htmlcov/
+*.dump
