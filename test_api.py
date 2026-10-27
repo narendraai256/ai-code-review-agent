@@ -114,6 +114,8 @@ class TestFastAPI(unittest.TestCase):
 
         self.assertEqual(response.status_code, 422)
 
+
+
     # TEST 7: Successful AI workflow.
     def test_analyze_success(self):
         result = {
@@ -494,3 +496,62 @@ class TestFastAPI(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+# Additional API input validation tests.
+class TestAPIValidation(unittest.TestCase):
+
+    def setUp(self):
+        self.client = TestClient(main.app)
+        self.valid_pr = {
+            "repository": "test-repository",
+            "pr_number": 101,
+            "additions": 80,
+            "deletions": 20,
+            "files_changed": 5,
+            "code": "result = 10 + 20"
+        }
+
+    # Tests invalid values for required PR fields.
+    def test_invalid_pull_request_fields(self):
+        cases = [
+            ("pr_number", 0),
+            ("additions", -10),
+            ("deletions", -5),
+            ("files_changed", -2),
+            ("repository", ""),
+            ("code", ""),
+            ("additions", "hello"),
+        ]
+
+        for field, value in cases:
+            with self.subTest(field=field, value=value):
+                data = self.valid_pr.copy()
+                data[field] = value
+
+                response = self.client.post("/analyze", json=data)
+
+                self.assertEqual(response.status_code, 422)
+                self.assertTrue(
+                    any(
+                        error["loc"] == ["body", field]
+                        for error in response.json()["detail"]
+                    )
+                )
+
+    # Tests required fields that are completely missing.
+    def test_missing_pull_request_fields(self):
+        for field in ("repository", "code"):
+            with self.subTest(field=field):
+                data = self.valid_pr.copy()
+                del data[field]
+
+                response = self.client.post("/analyze", json=data)
+
+                self.assertEqual(response.status_code, 422)
+                self.assertTrue(
+                    any(
+                        error["loc"] == ["body", field]
+                        and error["type"] == "missing"
+                        for error in response.json()["detail"]
+                    )
+                )
